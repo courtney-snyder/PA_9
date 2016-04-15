@@ -1,0 +1,9 @@
+Mass
+x-velocity (might not need)
+y-velocity (might not need)
+x-pos
+y-pos
+type
+	0 – static: no additional info
+	1 – nonstatic: no additional info
+ 	2 – constant: body#, radius, direction (velocity will be calculated based off this)
