@@ -64,31 +64,40 @@ private:
 
 
 
-class staticBody //does not move, is not affected by forces
+class staticBody : public Body //does not move, is not affected by forces
 {
 public:
 	//A large planet
 	staticBody(double initMass = 0, double initxPos = 0, double inityPos = 0);
-	//Setters
-	void setMass(double newMass);
-	void setXPos(double newXPos);
-	void setYPos(double newYPos);
-	//Getters
-	double getMass()const;
-	double getXPos()const;
-	double getYPos()const;
-protected:
-	double mMass;
-	double mXPos;
-	double mYPos;
+	//Setter
+	void setDie(bool newDeath);
+	//Getter
+	bool getDie()const;
+private:
+	bool mDie; //If true, you die
 };
 
 class nonstaticBody : public Body //something that can move around, is affected
 {
+public:
 	//The ball
+	nonstaticBody(double initMass = 0, double initxPos = 0, double inityPos = 0, double initxVel = 0, double inityVel = 0);
 };
 
-class constantBody : public Body //like something orbiting another body, maintains constant path
+class constantBody : public nonstaticBody //like something orbiting another body, maintains constant path
 {
 	//Moon orbitting a planet
+	constantBody(double initMass = 0, double initxPos = 0, double inityPos = 0, double initxVel = 0, double inityVel = 0);
+	//Setters
+	void setOrbittingBody(int newBody);
+	void setRadius(double newRadius);
+	void setDirection(bool newDirection);
+	//Getters
+	int getOrbittingBody()const;
+	double getRadius()const;
+	bool getDirection()const;
+private:
+	int mOrbittingBody; //What body it is orbitting
+	double mRadius;
+	bool mDirection; //Clockwise or counterclockwise
 };
