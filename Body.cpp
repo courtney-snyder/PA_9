@@ -27,7 +27,7 @@ void Body::setMass(double newMass)
 void Body::setRadius(double newRadius)
 {
 	this->mRadius = newRadius;
-	this->mShape.setRadius(mRadius); //So the graphic is the correct size
+	this->mShape.setRadius((float) mRadius); //So the graphic is the correct size
 }
 void Body::setXPos(double newXPos)
 {
