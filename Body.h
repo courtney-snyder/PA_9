@@ -1,5 +1,4 @@
 #pragma once
-
 #include <iostream>
 #include <string>
 #include <SFML/Graphics.hpp>
@@ -15,7 +14,9 @@ using std::endl;
 class Body
 {
 public:
+	//Constructor
 	Body(double initMass = 0, double initRadius = 0, double initxPos = 0, double inityPos = 0, double initxVel = 0, double inityVel = 0);
+	//Copy Constructor
 	Body(Body *& newBody);
 	//Setters
 	void setMass(double newMass);
@@ -24,6 +25,7 @@ public:
 	void setYPos(double newYPos);
 	void setXVel(double newXVel);
 	void setYVel(double newYVel);
+	virtual Body* getBody(int i = 0);
 	//Getter
 	double getMass()const;
 	double getRadius()const;
@@ -51,10 +53,12 @@ public:
 	void setBody(int i, double newMass, double newXPos, double newYPos, double newXVel, double newYVel);
 	//Getter
 	int getMaxSize()const;
-	Body getBody(int i)const;
-private:
+	Body* getBody(int i)const;
+	//Others
+	int isOpen(sf::RenderWindow &window, double x, double y);
+protected:
 	int maxSize;
-	Body Bodies[100]; //This is an array of type BODY because that way we can have Body* types
+	Body *Bodies[100]; //This is an array of type BODY because that way we can have Body* types
 	double mMass[100];
 	double mXPos[100];//these are used by other functions instead of the values inside each "Body" object. This way, all moveable objects update at once.  
 	double mYPos[100];
@@ -71,6 +75,7 @@ public:
 	void setDie(bool newDeath);
 	//Getter
 	bool getDie()const;
+	staticBody* getBody(int i, Universe &map)const;
 private:
 	/*
 	INHERITS:
@@ -90,6 +95,12 @@ class nonstaticBody : public Body //something that can move around, is affected 
 {
 public:
 	nonstaticBody(double initMass = 0, double initRadius = 0, double initxPos = 0, double inityPos = 0, double initxVel = 0, double inityVel = 0);
+	//Getter
+	nonstaticBody* getBody(int i, Universe &map);
+	//Others
+	void shoot(int i, Universe map, sf::RenderWindow &window);
+	void moving(Universe &map, sf::RenderWindow &window);
+
 	/*
 	INHERITS:
 	sf::CircleShape mShape;
@@ -113,6 +124,7 @@ class constantBody : public nonstaticBody //like something orbiting another body
 	//Getters
 	int getOrbittingBody()const;
 	bool getDirection()const;
+	constantBody* getBody(int i, Universe &map);
 private:
 	/*
 	INHERITS:
@@ -132,3 +144,6 @@ private:
 	int mOrbittingBody; //What body the moon is orbitting
 	bool mDirection; //Clockwise or counterclockwise
 };
+
+int tutorial(int &level, sf::RenderWindow &window, Universe map, sf::CircleShape goal);
+int level1(int &level, sf::RenderWindow &window, Universe map, sf::CircleShape goal);

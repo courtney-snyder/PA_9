@@ -15,3 +15,9 @@ bool staticBody::getDie()const
 {
 	return this->mDie;
 }
+staticBody* staticBody::getBody(int i, Universe &map)const
+{
+	Body *returnBody = new staticBody;
+	returnBody = map.getBody(i);
+	return dynamic_cast<staticBody*>(returnBody);
+}

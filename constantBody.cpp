@@ -22,3 +22,9 @@ bool constantBody::getDirection()const
 {
 	return this->mDirection;
 }
+constantBody* constantBody::getBody(int i, Universe &map)
+{
+	Body* returnBody = new constantBody;
+	returnBody = map.getBody(i);
+	return dynamic_cast<constantBody*>(returnBody);
+}
