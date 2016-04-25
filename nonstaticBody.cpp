@@ -10,9 +10,9 @@ nonstaticBody* nonstaticBody::getBody(int i, Universe &map)
 	returnBody = map.getBody(i);
 	return dynamic_cast<nonstaticBody*>(returnBody);
 }
-void nonstaticBody::shoot(int i, Universe map, sf::RenderWindow &window)
+void nonstaticBody::shoot(int i, Universe &map, sf::RenderWindow &window)
 {
-	while (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	while (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		i++;
 	//mShape.move(i / 100000, 0);
 	mXVel = i / 200000;
@@ -22,8 +22,8 @@ void nonstaticBody::shoot(int i, Universe map, sf::RenderWindow &window)
 void nonstaticBody::moving(Universe &map, sf::RenderWindow &window)
 {
 	int direction = 0;
-
-	while (mXVel != 0 && mYVel != 0)
+	
+	while (this->mXVel != 0 && this->mYVel != 0) //If the ball is moving
 	{
 		if (map.isOpen(window, mShape.getPosition().x, mShape.getPosition().y) != 0)
 			printf("working\n");
@@ -55,6 +55,8 @@ void nonstaticBody::moving(Universe &map, sf::RenderWindow &window)
 			mShape.move(0, -2 * mYVel);
 		if (mShape.getPosition().y > 460)
 			mShape.move(0, -2 * mYVel);
-		window.draw(this->mShape);
 	}
+	window.clear();
+	window.draw(map.getBody(0)->mShape);
+	window.display();
 }
