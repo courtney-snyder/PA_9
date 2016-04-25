@@ -70,3 +70,8 @@ double Body::getYVel()const
 {
 	return this->mYVel;
 }
+Body* Body::getBody(int i)
+{
+	//Virtual function
+	return this;
+}
