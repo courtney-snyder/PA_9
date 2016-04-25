@@ -15,7 +15,7 @@ class Body
 {
 public:
 	//Constructor
-	Body(double initMass = 0, double initRadius = 0, double initxPos = 0, double inityPos = 0, double initxVel = 0, double inityVel = 0);
+	Body(double initMass = 0, double initRadius = 1, double initxPos = 0, double inityPos = 0, double initxVel = 0, double inityVel = 0);
 	//Copy Constructor
 	Body(Body *& newBody);
 	//Setters
@@ -98,7 +98,7 @@ public:
 	//Getter
 	nonstaticBody* getBody(int i, Universe &map);
 	//Others
-	void shoot(int i, Universe map, sf::RenderWindow &window);
+	void shoot(int i, Universe &map, sf::RenderWindow &window);
 	void moving(Universe &map, sf::RenderWindow &window);
 
 	/*
@@ -145,5 +145,5 @@ private:
 	bool mDirection; //Clockwise or counterclockwise
 };
 
-int tutorial(int &level, sf::RenderWindow &window, Universe map, sf::CircleShape goal);
-int level1(int &level, sf::RenderWindow &window, Universe map, sf::CircleShape goal);
+int tutorial(int level, sf::RenderWindow &window, Universe &map, sf::CircleShape goal);
+int level1(int level, sf::RenderWindow &window, Universe &map, sf::CircleShape goal);
